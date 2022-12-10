@@ -1,37 +1,22 @@
 class Solution:
-    # O(n) time | O(n) space
+    # O(N) time | O(N) space
+    # Notice that the function does two things:
+    #   1) Finds the subtree sum rooted at node.
+    #   2) Updates the max product seen so far.
     def maxProduct(self, root: Optional[TreeNode]) -> int:
-        def subtreeSum(root):
-            total = 0
-            stack = [root]
-
-            while stack:
-                node = stack.pop()
-                if not node:
-                    continue
-                total += node.val
-                stack.append(node.left)
-                stack.append(node.right)
-
-            return total
-
-        total = subtreeSum(root)
-        
-        def findMaxProduct(node):
-            subtree_sum = 0
-            if not node:
-                return subtree_sum
-
-            left_sum = findMaxProduct(node.left)
-            right_sum = findMaxProduct(node.right)
-
-            subtree_sum = node.val + left_sum + right_sum
-            product = (total - subtree_sum) * subtree_sum
-            self.ans = max(self.ans, product)
-
-            return subtree_sum
-
         self.ans = 0
+        self.total = 0
+
+        def subtreeSum(node):
+            if not node:
+                return 0
+            left = subtreeSum(node.left)
+            right = subtreeSum(node.right)
+            subtree_sum = node.val + left + right
+            self.ans = max(self.ans, subtree_sum * (self.total - subtree_sum))
+            return subtree_sum
+        
+        self.total = subtreeSum(root)
+        subtreeSum(root)
         MOD = 10**9 + 7
-        findMaxProduct(root)
         return self.ans % MOD
