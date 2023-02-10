@@ -1,4 +1,5 @@
 class Solution:
+    # O(n^2) time | O(n^2) space
     def maxDistance(self, grid: List[List[int]]) -> int:
         rows = len(grid)
         cols = len(grid[0])
