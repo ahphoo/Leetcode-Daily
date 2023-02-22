@@ -1,5 +1,5 @@
 class Solution:
-    # O(n) time | O(1) space
+    # O(nlogn) time | O(1) space
     def shipWithinDays(self, weights: List[int], days: int) -> int:
         
         def canShip(capacity: int, current_days: int) -> bool:
