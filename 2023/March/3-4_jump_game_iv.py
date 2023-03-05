@@ -1,5 +1,5 @@
 class Solution:
-    # O(n) time | O(1) space - Modified BFS
+    # O(n) time | O(n) space - Modified BFS
     def minJumps(self, arr: List[int]) -> int:
         n = len(arr)
         nei = defaultdict(list)
